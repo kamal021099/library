@@ -8,10 +8,26 @@
 </head>
 
 <body>
-    <button id="add">add</button>
-
-
+    <!-- button to add books -->
+    <button id="add">add</button> 
+     
+    <!-- container to keep the books "cards". cards are added through js -->
     <div class="container"></div>
+
+    <!-- to be displayed relativ -->
+    <form>
+        <input type="text" id="title" name="title" placeholder="Enter the title" required>
+        <input type="text" id="author" name="author" placeholder="Enter the authors name" required>
+        <input type="text" id="pages" name="pages" placeholder="Enter the no. of pages" required>
+        
+        <label for="yes">Yes</label>
+        <input type="radio" name="read" id="yes" required value="read">
+        <label for="no">No</label>
+        <input type="radio" name="read" id="no" required value="not read">
+
+        <input type="submit" name="submit" id="submit">
+    </form>
+
 </body>
 <script src="myjavascript.js"></script>
 </html>

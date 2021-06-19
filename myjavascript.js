@@ -22,19 +22,29 @@ function book(title, author, pages, read)
 
 
 function addBookToLibrary() {
-	title = prompt("Enter the books title");
-	author = prompt("author?");
-	pages = prompt("pages");
-	read = prompt("read? yes or no");
-	
-	let x = new book(title,author, pages,read ) ; //cant think of a variable name lol!
 
+	let form = document.querySelector("form");
+
+	let title = form.querySelector("#title").value;
+	let author = form.querySelector("#author").value;
+	let pages = form.querySelector("#pages").value;
+	let read;
+	let reads = form.querySelectorAll(`input[type="radio"]`);
+	reads.forEach(radio => {
+		if(radio.checked){
+			read = radio.value;
+		}
+	});
+
+	let x = new book(title,author, pages,read ) ; //cant think of a variable name lol!
 	myLibrary.push(x);
 }
 // addBookToLibrary();
 // console.log(myLibary[0].info());  so till here it is working as expected an
 // and it is a goddamn function.
 
+
+//dummy data
 let y = new book();
 y.author = "dfsa";
 y.title = "dfsa";
@@ -48,6 +58,7 @@ z.title = "3";
 z.pages = "3";
 z.read = "3";
 myLibrary.push(z);
+//dummy data
 
 let displayed = 0;  //to not let the books reapeat in the for loop when displayed.
 function displayBooks() {
@@ -80,7 +91,7 @@ function displayBooks() {
 	}
 }
 
-displayBooks();
+displayBooks(); //executing here to display the dummy data.
 
 
 	
@@ -89,7 +100,14 @@ displayBooks();
 // //to make the user add the book by calling the addBookToLibrary func.
 const add = document.querySelector("#add");
 add.addEventListener('click', () => {
-	addBookToLibrary();
-	displayBooks();
+	let form = document.querySelector("form");
+	form.style.display = "block";
 }
 )
+
+const submit = document.querySelector("#submit");
+submit.addEventListener('click', (e) => {
+	e.preventDefault();
+	addBookToLibrary();
+	displayBooks();
+})
