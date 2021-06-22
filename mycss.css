@@ -1,7 +1,21 @@
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    margin: auto;
+
+    text-align: center;
+}
+
+
 body{
     position: relative;
+    background: url("https://i.pinimg.com/600x315/14/f6/43/14f64328ffef40a0aa701f00779389d5.jpg");
+    background-repeat: no-repeat;
+    background-size: 1000%;
 }
+
+
 #add{
+    
 
 }
 

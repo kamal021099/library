@@ -29,14 +29,11 @@ function addBookToLibrary() {
 	let author = form.querySelector("#author").value;
 	let pages = form.querySelector("#pages").value;
 	let read;
-	let reads = form.querySelectorAll(`input[type="radio"]`);
-	reads.forEach(radio => {
-		if(radio.checked){
-			read = radio.value;
-		}
-	});
+	let reads = form.querySelector(`input[type="checkbox"]`);
+	if(reads.checked) read = "read";
+	else read = "not read";
 
-	let x = new book(title,author, pages,read ) ; //cant think of a variable name lol!
+	let x = new book(title,author, pages, read) ; //cant think of a variable name lol!
 	myLibrary.push(x);
 }
 // addBookToLibrary();
@@ -44,21 +41,21 @@ function addBookToLibrary() {
 // and it is a goddamn function.
 
 
-//dummy data
-let y = new book();
-y.author = "dfsa";
-y.title = "dfsa";
-y.pages = "dfsa";
-y.read = "dfsa";
-myLibrary.push(y);
+// //dummy data
+// let y = new book();
+// y.author = "dfsa";
+// y.title = "dfsa";
+// y.pages = "dfsa";
+// y.read = "dfsa";
+// myLibrary.push(y);
 
-let z = new book();
-z.author = "3";
-z.title = "3";
-z.pages = "3";
-z.read = "3";
-myLibrary.push(z);
-//dummy data
+// let z = new book();
+// z.author = "3";
+// z.title = "3";
+// z.pages = "3";
+// z.read = "3";
+// myLibrary.push(z);
+// //dummy data
 
 let displayed = 0;  //to not let the books reapeat in the for loop when displayed.
 function displayBooks() {
@@ -83,24 +80,27 @@ function displayBooks() {
 		pages.textContent = "pages: " + myLibrary[displayed].pages;
 		card.appendChild(pages);
 		
-		let read = document.createElement("p");
-		read.textContent = "read: " + myLibrary[displayed].read;
+		let read = document.createElement("button");
+		read.classList.add("read");
+		read.textContent = myLibrary[displayed].read;
+		read.addEventListener('click', toggleRead);
 		card.appendChild(read);
 		
 		let del = document.createElement("button");
 		del.textContent = "del";
 		del.classList.add("delete");
 		del.setAttribute("data-key", displayed);
+		del.addEventListener('click', delCard);
 		card.appendChild(del);
+
 
 		container.appendChild(card);
 
-		delEvent();
 
 	}
 }
 
-displayBooks(); //executing here to display the dummy data.
+
 
 
 	
@@ -127,22 +127,10 @@ submit.addEventListener('click', (e) => {
 })
 
 
-function delEvent(){
-	
-	const dels = document.querySelectorAll(".delete");
-	dels.forEach(del => {
-		del.addEventListener('click', delCard);
-	})
-
-}
-
 function delCard(e){
 	let key = e.target.getAttribute("data-key");
-	console.log(key);
-	console.log(myLibrary);
 	
 	myLibrary.splice(key,1);
-	console.log(myLibrary);
 
 	// //always delete the prev container before rerunning such fn.
 	document.querySelector(".container").innerHTML = '';
@@ -150,3 +138,9 @@ function delCard(e){
 	displayBooks();
 
 }
+
+function toggleRead(){
+	if(this.textContent == "read") this.textContent = "not read";
+	else this.textContent = "read";
+}
+
